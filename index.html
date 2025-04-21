@@ -1,41 +1,14 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Форма регистрация</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
+        <link rel="stylesheet" type="text/css"  href="CSS/style.css">
+     </head>
     <body>
-        <form class="registration-form">
-            <h2>Регистрация</h2>
-            <label for="username">Ваше прозвище:</label>
-            <input type="text" id="username" name="username" placeholder="Введите логин" required>
-
-            <label for="password">Ключ от души:</label>
-            <input type="password" id="password" name="password" placeholder="Введите пароль" required>
-
-            <label for="email"> Место для спама-почта:</label>
-            <input type="email" id="email" name="email" placeholder="Введите почту" required>
-
-            <label for="adress">Адресс обитания:</label>
-            <input type="text" id="adress" name="adress" placeholder="Введите свой адресс" required>
-
-            <label for="birthdate">Дата рождения:</label>
-            <input type="date" id="birthdate" name="birthdate" required>
-            
-            <label for="gender">Пол:</label>
-            <select id="gender" name="gender" required>
-                <option value="male">Мужской</option>
-                <option value="female">Женский</option>
-            </select>
-
-            <button type="button">Оправить</button>
-            <button type="button" class="clear-button" onclick="resetForm()">Очистить форму</button>
-        </form>
-
-        <script>
-            function resetForm(){
-                document.querySelector('.registration-form').reset();
-            }
-        </script>
+        <h1>My projects</h1>
+        <ul>
+            <li><a href="./Проекты/Form registration/index.html">Form registration for student Itlandia</a></li>
+            <li><a>Task "Table" for  student Itlandia</a></li>
+        </ul>
     </body>
 </html>
