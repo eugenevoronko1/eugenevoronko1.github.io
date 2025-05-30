@@ -7,7 +7,12 @@
         <link rel="stylesheet" type="text/css" href="CSS/style.css">
     </head>
     <body>
-        <header>
+            <header>
+        <video class="video-container" autoplay loop muted playsinline poster="Images/start_image.png">
+            <source src="Video/furniture.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="header-content">
             <h1>Идеальная мебель для вашего дома</h1>
             <nav>
                 <ul>
@@ -16,29 +21,39 @@
                     <li><a href="#contacts">Контакты</a></li>
                 </ul>
             </nav>
-        </header>
-        <main>
-            <section id="about">
-                <h2>О нас</h2>
-                <p>Мы создаем стильную и функциональную мебель для вашего комфорта.</p>
-            </section>
-            <section id="#products">
-                <h2>О нас</h2>
-                <div class="product-grid">
-                    <div class="product">Диваны</div>
-                    <div class="product">Столы</div>
-                    <div class="product">Кресла</div>
-                </div>
-            </section>
-            <section id="#contacts">
-                <h2>Контакты</h2>
-                <p>Email: info@mebelhit.by</p>
-                <p>Телефон: +375 29 123 45 67</p>
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2025 Мебель Хит</p>
-        </footer>
-        <script src="script.js"></script>
+        </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>О нас</h2>
+            <p>Мы создаем стильную и функциональную мебель для вашего комфорта.</p>
+        </section>
+        <section id="products">
+            <h2>Продукция</h2>
+            <div class="product-grid">
+                <div class="product"><img src="https://vamrad.by/upload/iblock/f79/f79e106a8c07eb40720b019a98bb83dd.png"><figcaption>Диваны</figcaption></div>
+                <div class="product">Столы</div>
+                <div class="product">Кресла</div>
+                <div class="product">Кровати</div>
+                <div class="product">Тумбы и Комоды</div> 
+                <div class="product">Вешалки</div>
+                <div class="product">Зеркала</div>
+                <div class="product">Кухонная мебель</div>
+            </div>
+        </section>
+        <section id="contacts">
+            <h2>Контакты</h2>
+            <p>Email: info@mebelhit.by</p>
+            <p>Телефон: +375 29 123 45 67</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Мебель Хит</p>
+    </footer>
+
+    <script src="script.js"></script>
+
     </body>
 </html>
