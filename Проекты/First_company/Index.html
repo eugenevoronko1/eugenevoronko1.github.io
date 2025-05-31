@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Мебель Хит</title>
-        <link rel="stylesheet" type="text/css" href="CSS/style.css">
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мебель Хит</title>
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+</head>
+<body>
+    <!-- Меню -->
+    <nav>
+        <div class="logo">Мебель Хит</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul id="nav-menu">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#products">Продукция</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+    </nav>
+
     <header>
         <video class="video-container" autoplay loop muted playsinline poster="Images/start_image.png">
             <source src="Video/furniture.mp4" type="video/mp4">
@@ -14,13 +25,6 @@
         </video>
         <div class="header-content">
             <h1>Идеальная мебель для вашего дома</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#products">Продукция</a></li>
-                    <li><a href="#contacts">Контакты</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
@@ -53,7 +57,11 @@
         <p>&copy; 2025 Мебель Хит</p>
     </footer>
 
-    <script src="script.js"></script>
-
-    </body>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
 </html>
