@@ -135,8 +135,9 @@ header {
     position: relative;
     z-index: 1;
     backdrop-filter: blur(15px);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.7);
     padding: 10px 20px;
+    border-radius: 15px;
 }
 
 .header-content h1,
@@ -170,10 +171,9 @@ section {
     text-align: justify;
 }
 
-#info ul {
-    padding-left: 20px;
+#info h2{
+    margin-bottom: 20px;
 }
-
 /* Продукция */
 .product-grid {
     display: grid;
@@ -201,11 +201,31 @@ section {
 
 /* Контакты и футер */
 #contacts {
-    padding: 40px;
-    background: #ddd;
-}
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+
+  .contact-info,
+  .contact-address {
+    flex: 1 1 300px;
+  }
+
+  .contact-info p,
+  .contact-address address {
+    margin: 0.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    #contacts {
+      flex-direction: column;
+    }
+  }
 
 footer {
+    padding: 3% auto;
+    text-align: center;
     padding: 20px;
     background: #222;
     color: #fff;
@@ -223,7 +243,7 @@ footer {
 .info-columns {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 40px;
+    gap: 20px;
     text-align: left;
 }
 
@@ -231,6 +251,7 @@ footer {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 8px;
+    text-align: left;
 }
 
 .info-columns ul {
