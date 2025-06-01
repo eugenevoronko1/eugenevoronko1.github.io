@@ -1,8 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const products = document.querySelectorAll(".product");
-    products.forEach(product => {
-        product.addEventListener("click", () => {
-            alert(`Вы выбрали: ${product.textContent}`);
-        });
-    });
-});
+ function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
