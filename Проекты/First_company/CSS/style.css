@@ -223,6 +223,7 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
   text-align: center;
+  margin-top: 40px;
 }
 
 .product {
