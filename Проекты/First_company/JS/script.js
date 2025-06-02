@@ -12,7 +12,7 @@ function easeInOutCubic(t) {
 }
 
 // Плавная прокрутка до элемента
-function scrollToTarget(target, duration = 800, offset = 60) {
+function scrollToTarget(target, duration = 800, offset = 100) {
   const targetY = target.getBoundingClientRect().top - offset;
   const startY = window.pageYOffset;
   let startTime = null;
