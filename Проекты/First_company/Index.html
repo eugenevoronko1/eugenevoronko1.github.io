@@ -13,6 +13,7 @@
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <ul id="nav-menu">
             <li><a href="#about">О нас</a></li>
+            <li><a href="#offers">Предложения</a></li>
             <li><a href="#products">Продукция</a></li>
             <li><a href="#contacts">Контакты</a></li>
         </ul>
@@ -29,23 +30,24 @@
     </header>
 
     <main>
+        <!-- О нас -->
         <section id="info">
-            <h2>О нас</h2>
+            <h2 id="about">О нас</h2>
             <p>
                 Компания Мебель Хит — это производитель мебели, ориентированный на сочетание современного дизайна, эргономики и высокого качества.
                 Мы уверены, что мебель должна быть не просто предметом интерьера, а полноценным элементом уюта, функциональности и индивидуального стиля в вашем доме или офисе.
             </p>
         </section>
 
+        <!-- Карусель -->
         <section class="hero-carousel">
             <div class="carousel-track">
-                <img src="Images/logo-photo.jpg" alt="Фото 1">
-                <img src="Images/Диваны.jpg" alt="Фото 2">
-                <img src="Images/Кресла.jpg" alt="Фото 3">
-                <img src="Images/Столы.jpg" alt="Фото 4">
+                <img src="Images/logo-photo.jpg" alt="Пример офиса с нашей мебелью">
+                <img src="Images/Диваны.jpg" alt="Фото диванов">
+                <img src="Images/Кресла.jpg" alt="Фото кресла">
+                <img src="Images/Столы.jpg" alt="Фото столы">
             </div>
 
-            <!-- Добавляем сюда -->
             <div class="blur-top"></div>
             <div class="blur-bottom"></div>
 
@@ -54,8 +56,9 @@
             </div>
         </section>
 
+        <!-- Предложения -->
         <section id="info">
-            <h2>Что мы предлагаем ?</h2>
+            <h2 id="offers">Что мы предлагаем ?</h2>
             <p class="info-intro">
                 Ассортимент Мебель Хит охватывает все основные категории домашней мебели — от практичных решений для небольших квартир до стильных комплектов для просторных интерьеров. Ниже вы можете ознакомиться с небольшой частью нашего ассортимента:
             </p>
@@ -109,72 +112,30 @@
             </p>
         </section>
 
+        <!-- Продукция -->
         <section id="products">
             <h2>Продукция</h2>
             <div class="product-grid">
-                <div class="product">
-                    <img src="Images/Диваны.jpg" alt="Диваны">
-                    <figcaption>Диваны</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Кресла.jpg" alt="Столы">
-                    <figcaption>Кресла</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Уголки.jpg" alt="Кресла">
-                    <figcaption>Уголки</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Кровати.jpg" alt="Кровати">
-                    <figcaption>Кровати</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Прикроватные_тумбы.jpg" alt="Тумбы и Комоды">
-                    <figcaption>Прикроватные тумбы</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Комоды.jpg" alt="Вешалки">
-                    <figcaption>Комоды</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Гарнитуры.jpg" alt="Зеркала">
-                    <figcaption>Гарнитуры</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Столы.jpg" alt="Кухонная мебель">
-                    <figcaption>Столы</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Стулья.jpg" alt="Шкафы">
-                    <figcaption>Стулья</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Вешалки.jpg" alt="Ванная мебель">
-                    <figcaption>Вешалки</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Обувницы.jpg" alt="Ванная мебель">
-                    <figcaption>Обувницы</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Зеркала.jpg" alt="Ванная мебель">
-                    <figcaption>Зеркала</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Тумба_под_раковину.jpg" alt="Ванная мебель">
-                    <figcaption>Тумба под раковину</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Зеркальный_шкаф.jpg" alt="Ванная мебель">
-                    <figcaption>Зеркальный шкаф</figcaption>
-                </div>
-                <div class="product">
-                    <img src="Images/Пенал.jpg" alt="Ванная мебель">
-                    <figcaption>Пенал</figcaption>
-                </div>
+                <!-- Повторяющийся блок товара -->
+                <div class="product"><img src="Images/Диваны.jpg" alt="Диваны"><figcaption>Диваны</figcaption></div>
+                <div class="product"><img src="Images/Кресла.jpg" alt="Столы"><figcaption>Кресла</figcaption></div>
+                <div class="product"><img src="Images/Уголки.jpg" alt="Кресла"><figcaption>Уголки</figcaption></div>
+                <div class="product"><img src="Images/Кровати.jpg" alt="Кровати"><figcaption>Кровати</figcaption></div>
+                <div class="product"><img src="Images/Прикроватные_тумбы.jpg" alt="Тумбы и Комоды"><figcaption>Прикроватные тумбы</figcaption></div>
+                <div class="product"><img src="Images/Комоды.jpg" alt="Вешалки"><figcaption>Комоды</figcaption></div>
+                <div class="product"><img src="Images/Гарнитуры.jpg" alt="Зеркала"><figcaption>Гарнитуры</figcaption></div>
+                <div class="product"><img src="Images/Столы.jpg" alt="Кухонная мебель"><figcaption>Столы</figcaption></div>
+                <div class="product"><img src="Images/Стулья.jpg" alt="Шкафы"><figcaption>Стулья</figcaption></div>
+                <div class="product"><img src="Images/Вешалки.jpg" alt="Ванная мебель"><figcaption>Вешалки</figcaption></div>
+                <div class="product"><img src="Images/Обувницы.jpg" alt="Ванная мебель"><figcaption>Обувницы</figcaption></div>
+                <div class="product"><img src="Images/Зеркала.jpg" alt="Ванная мебель"><figcaption>Зеркала</figcaption></div>
+                <div class="product"><img src="Images/Тумба_под_раковину.jpg" alt="Ванная мебель"><figcaption>Тумба под раковину</figcaption></div>
+                <div class="product"><img src="Images/Зеркальный_шкаф.jpg" alt="Ванная мебель"><figcaption>Зеркальный шкаф</figcaption></div>
+                <div class="product"><img src="Images/Пенал.jpg" alt="Ванная мебель"><figcaption>Пенал</figcaption></div>
             </div>
         </section>
 
+        <!-- Почему мы -->
         <section id="why-us">
             <div class="why-container">
                 <h2>Почему выбирают нас?</h2>
@@ -188,6 +149,7 @@
             </div>
         </section>
 
+        <!-- Контакты -->
         <section id="contacts">
             <div class="contact-info">
                 <h2>Контакты</h2>
