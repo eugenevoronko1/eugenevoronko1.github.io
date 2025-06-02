@@ -324,7 +324,7 @@ footer {
   display: flex;
   width: 400%;
   height: 100%;
-  animation: scroll-carousel 40s linear infinite;
+  animation: scroll-carousel 120s linear infinite;
 }
 
 .carousel-track img {
