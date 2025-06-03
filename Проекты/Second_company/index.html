@@ -1,132 +1,37 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог Мебели - Диваны</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header class="site-header">
-        <div class="logo">МебельОнлайн</div>
-        <nav class="main-nav">
-            <a href="#">Главная</a>
-            <a href="#">Каталог</a>
-            <a href="#">Акции</a>
-            <a href="#">О нас</a>
-            <a href="#">Контакты</a>
-        </nav>
-        <div class="header-icons">
-            <span>👤</span>
-            <span>❤️</span>
-            <span>🛒</span>
-        </div>
-    </header>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <nav class="main-navigation">
+    <ul class="nav-items nav-left">
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Предложения</a></li>
+    </ul>
 
-    <nav class="breadcrumbs">
-        <a href="#">Главная</a> &raquo;
-        <a href="#">Мебель для гостиной</a> &raquo;
-        <span>Диваны</span>
-    </nav>
+    <div class="logo">
+        <a href="#home">Мебель хит</a>
+    </div>
 
-    <main class="category-page">
-        <h1>Диваны</h1>
+    <ul class="nav-items nav-right">
+        <li><a href="#">Продукция</a></li>
+        <li><a href="#">Контакты</a></li>
+    </ul>
+</nav>
 
-        <div class="content-wrapper">
-            <aside class="filters">
-                <h2>Фильтры</h2>
-                <div class="filter-group">
-                    <h3>Цена</h3>
-                    <label for="price-min">От:</label>
-                    <input type="number" id="price-min" name="price-min" placeholder="10000">
-                    <label for="price-max">До:</label>
-                    <input type="number" id="price-max" name="price-max" placeholder="150000">
-                </div>
-                <div class="filter-group">
-                    <h3>Материал обивки</h3>
-                    <label><input type="checkbox" name="material" value="velour"> Велюр</label><br>
-                    <label><input type="checkbox" name="material" value="eco-leather"> Экокожа</label><br>
-                    <label><input type="checkbox" name="material" value="fabric"> Ткань</label><br>
-                </div>
-                <div class="filter-group">
-                    <h3>Цвет</h3>
-                    <label><input type="checkbox" name="color" value="grey"> Серый</label><br>
-                    <label><input type="checkbox" name="color" value="beige"> Бежевый</label><br>
-                    <label><input type="checkbox" name="color" value="blue"> Синий</label><br>
-                </div>
-                <button class="apply-filters-btn">Применить фильтры</button>
-            </aside>
+<header>
 
-            <section class="product-listing">
-                <div class="sorting-options">
-                    <label for="sort-by">Сортировать по:</label>
-                    <select id="sort-by" name="sort-by">
-                        <option value="popularity">Популярности</option>
-                        <option value="price-asc">Цене (сначала дешевые)</option>
-                        <option value="price-desc">Цене (сначала дорогие)</option>
-                        <option value="newest">Новизне</option>
-                    </select>
-                </div>
+</header>
 
-                <div class="product-grid">
-                    <article class="product-card">
-                        <img src="https://via.placeholder.com/250x180.png?text=Диван+Честер" alt="Диван Честер">
-                        <h2>Диван "Честер"</h2>
-                        <p class="product-price">75 000 ₽</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart-btn">В корзину</button>
-                            <button class="details-btn">Подробнее</button>
-                        </div>
-                    </article>
+<main>
 
-                    <article class="product-card">
-                        <img src="https://via.placeholder.com/250x180.png?text=Диван+Лофт" alt="Диван Лофт">
-                        <h2>Диван "Лофт Стайл"</h2>
-                        <p class="product-price">58 900 ₽</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart-btn">В корзину</button>
-                            <button class="details-btn">Подробнее</button>
-                        </div>
-                    </article>
+</main>
 
-                    <article class="product-card">
-                        <img src="https://via.placeholder.com/250x180.png?text=Диван+Угловой" alt="Диван Угловой">
-                        <h2>Диван угловой "Комфорт"</h2>
-                        <p class="product-price">92 300 ₽</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart-btn">В корзину</button>
-                            <button class="details-btn">Подробнее</button>
-                        </div>
-                    </article>
-                     <article class="product-card">
-                        <img src="https://via.placeholder.com/250x180.png?text=Диван+Классик" alt="Диван Классик">
-                        <h2>Диван "Классика Жанра"</h2>
-                        <p class="product-price">65 500 ₽</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart-btn">В корзину</button>
-                            <button class="details-btn">Подробнее</button>
-                        </div>
-                    </article>
-                    </div>
+<footer>
 
-                <div class="pagination">
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">&raquo;</a>
-                </div>
-            </section>
-        </div>
-    </main>
+</footer>
 
-    <footer class="site-footer">
-        <div class="footer-nav">
-            <a href="#">Доставка и оплата</a>
-            <a href="#">Возврат и обмен</a>
-            <a href="#">Гарантия</a>
-            <a href="#">О компании</a>
-        </div>
-        <p>&copy; 2024 МебельОнлайн. Все права защищены.</p>
-    </footer>
-</body>
+
+    </body>
 </html>
