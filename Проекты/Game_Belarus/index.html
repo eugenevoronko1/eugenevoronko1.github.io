@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра-путешествие по Беларуси</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+       
+
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="left-panel">
+            <div class="game-title">Путешествие по Беларуси</div>
+            <div class="turn-tracker">
+                <span>Ход игрока:</span>
+                <div id="turn-display">Игрок 1</div>
+            </div>
+            <div class="qa-section">
+                <div id="question-container">Нажмите на кубик, чтобы начать игру...</div>
+                <div id="answers-container">
+                    </div>
+            </div>
+            <div class="dice-section">
+                <div id="dice" role="button" title="Бросить кубик">?</div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div id="game-board">
+                </div>
+            <div id="player1" class="player"></div>
+            <div id="player2" class="player"></div>
+        </div>
+    </div>
+    
+    <div id="winner-popup">
+        <h2 id="winner-message"></h2>
+        <button onclick="location.reload()">Играть снова</button>
+    </div>
+
+
+    <script src="Scripts/scripts.js"></script>
+</body>
+</html>

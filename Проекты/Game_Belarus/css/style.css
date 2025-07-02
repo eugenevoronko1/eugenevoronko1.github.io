@@ -1,0 +1,226 @@
+ /* --- ОБЩИЕ СТИЛИ --- */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden; /* Убираем прокрутку */
+        }
+
+        /* --- ОСНОВНОЙ КОНТЕЙНЕР И СЕТКА --- */
+        .game-container {
+            display: grid;
+            grid-template-columns: 280px 1fr; /* Левая колонка фиксированная, правая занимает остальное место */
+            grid-template-rows: 100vh; /* Высота на весь экран */
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-panel {
+            display: grid;
+            grid-template-rows: 80px 100px 1fr 150px; /* Размеры для каждого цветного блока */
+            height: 100vh;
+        }
+
+        .right-panel {
+            background-color: #FF0000; /* Красный цвет для карты */
+            padding: 20px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* --- ЦВЕТНЫЕ БЛОКИ СЛЕВА --- */
+        .game-title {
+            background-color: #40E0D0; /* Бирюзовый */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .turn-tracker {
+            background-color: #D8BFD8; /* Розовый (лиловый) */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3em;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #turn-display {
+            font-weight: bold;
+            margin-top: 5px;
+            font-size: 1.5em;
+        }
+
+        .qa-section {
+            background-color: #228B22; /* Зеленый */
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #question-container {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            height: 80px; /* Фиксированная высота для вопроса */
+            overflow-y: auto;
+        }
+        
+        #answers-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .answer-card {
+            background-color: #F0FFF0;
+            color: #228B22;
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            text-align: center;
+            font-weight: bold;
+        }
+        .answer-card:hover {
+            transform: scale(1.05);
+            background-color: white;
+        }
+        .answer-card.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+
+        .dice-section {
+            background-color: #0000FF; /* Синий */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #dice {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none; /* Запретить выделение текста */
+            transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+        #dice:hover {
+             transform: scale(1.1) rotate(15deg);
+        }
+        #dice.disabled {
+            cursor: not-allowed;
+            background-color: #ccc;
+            opacity: 0.7;
+        }
+
+
+        /* --- ИГРОВОЕ ПОЛЕ (КАРТА) --- */
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr); /* 10 клеток в ширину */
+            grid-template-rows: repeat(7, 1fr); /* 7 клеток в высоту */
+            gap: 5px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .step {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #333;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9em;
+            font-weight: bold;
+            position: relative;
+        }
+        .step.start { background-color: #90EE90; }
+        .step.finish { background-color: #FFD700; }
+
+        /* --- ФИШКИ ИГРОКОВ --- */
+        .player {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute; /* Позиционирование относительно родителя (.step) */
+            transition: all 0.7s ease-in-out;
+            z-index: 10;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        #player1 {
+            background-color: #1E90FF; /* Синий игрок */
+            transform: translate(-10px, -10px); /* Смещение для лучшего вида */
+        }
+
+        #player2 {
+            background-color: #FFD700; /* Желтый игрок */
+            transform: translate(10px, 10px); /* Смещение для лучшего вида */
+        }
+        
+        /* --- ВСПЛЫВАЮЩЕЕ ОКНО ПОБЕДИТЕЛЯ --- */
+        #winner-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: white;
+            border: 5px solid #FFD700;
+            border-radius: 15px;
+            padding: 40px;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease-in-out;
+            visibility: hidden;
+        }
+
+        #winner-popup.show {
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #winner-popup h2 {
+            margin-top: 0;
+            font-size: 2.5em;
+            color: #1E90FF;
+        }
+        
+        #winner-popup button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            background-color: #228B22;
+            color: white;
+        }
