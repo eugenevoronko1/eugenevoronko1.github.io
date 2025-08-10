@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Игра-путешествие по Беларуси</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <style>
-       
-
-    </style>
 </head>
 <body>
 
@@ -20,28 +21,46 @@
                 <div id="turn-display">Игрок 1</div>
             </div>
             <div class="qa-section">
-                <div id="question-container">Нажмите на кубик, чтобы начать игру...</div>
-                <div id="answers-container">
-                    </div>
+                <div id="status-container">Выберите цвета, чтобы начать игру...</div>
             </div>
             <div class="dice-section">
                 <div id="dice" role="button" title="Бросить кубик">?</div>
+                <button id="restart-game-btn">Начать заново</button>
             </div>
         </div>
 
         <div class="right-panel">
-            <div id="game-board">
-                </div>
+            <div id="game-board"></div>
             <div id="player1" class="player"></div>
             <div id="player2" class="player"></div>
         </div>
     </div>
     
+    <div id="color-selection-popup">
+        <div class="popup-content">
+            <h2>Выберите цвета для игроков</h2>
+            <div class="player-color-selector">
+                <h3>Игрок 1</h3>
+                <div id="player1-color-choices" class="color-choices"></div>
+            </div>
+            <div class="player-color-selector">
+                <h3>Игрок 2</h3>
+                <div id="player2-color-choices" class="color-choices"></div>
+            </div>
+            <button id="start-game-btn" class="disabled" disabled>Начать игру</button>
+        </div>
+    </div>
+
+    <div id="cell-popup">
+        <img id="cell-image" src="" alt="Достопримечательность Беларуси">
+        <div id="cell-question"></div>
+        <div id="cell-answers"></div>
+    </div>
+
     <div id="winner-popup">
         <h2 id="winner-message"></h2>
         <button onclick="location.reload()">Играть снова</button>
     </div>
-
 
     <script src="Scripts/scripts.js"></script>
 </body>

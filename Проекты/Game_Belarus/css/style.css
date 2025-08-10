@@ -1,226 +1,350 @@
- /* --- ОБЩИЕ СТИЛИ --- */
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            overflow: hidden; /* Убираем прокрутку */
-        }
+:root {
+    --font-family: 'Nunito', sans-serif;
+    
+    /* Цветовая палитра (на основе синего) */
+    --primary: #00668b;
+    --on-primary: #ffffff;
+    --primary-container: #c5e7ff;
+    --on-primary-container: #001e2d;
 
-        /* --- ОСНОВНОЙ КОНТЕЙНЕР И СЕТКА --- */
-        .game-container {
-            display: grid;
-            grid-template-columns: 280px 1fr; /* Левая колонка фиксированная, правая занимает остальное место */
-            grid-template-rows: 100vh; /* Высота на весь экран */
-            width: 100%;
-            height: 100%;
-        }
+    --secondary: #50606e;
+    --on-secondary: #ffffff;
+    --secondary-container: #d3e5f5;
+    --on-secondary-container: #0c1d29;
+    
+    --tertiary: #64597b;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #eaddff;
+    --on-tertiary-container: #1f1734;
 
-        .left-panel {
-            display: grid;
-            grid-template-rows: 80px 100px 1fr 150px; /* Размеры для каждого цветного блока */
-            height: 100vh;
-        }
+    --error: #ba1a1a;
+    --on-error: #ffffff;
 
-        .right-panel {
-            background-color: #FF0000; /* Красный цвет для карты */
-            padding: 20px;
-            position: relative;
-            box-sizing: border-box;
-        }
+    /* Поверхности */
+    --surface-dim: #d9dade;
+    --surface: #f8f9ff;
+    --surface-bright: #f8f9ff;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f2f3f9;
+    --surface-container: #eceef4;
+    --surface-container-high: #e6e8ee;
+    --surface-container-highest: #e1e2e8;
+    --on-surface: #191c20;
+    --on-surface-variant: #42474e;
+    --outline: #72787e;
+    --outline-variant: #c2c7ce;
+    
+    /* Тени (Elevation) */
+    --elevation-1: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+    --elevation-2: 0 1px 2px rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
+    --elevation-3: 0 1px 3px rgba(0,0,0,0.3), 0 4px 8px 3px rgba(0,0,0,0.15);
+    --elevation-4: 0 2px 3px rgba(0,0,0,0.3), 0 6px 10px 4px rgba(0,0,0,0.15);
+    --elevation-5: 0 4px 4px rgba(0,0,0,0.3), 0 8px 12px 6px rgba(0,0,0,0.15);
+    
+    /* Формы (скругления) */
+    --shape-corner-small: 4px;
+    --shape-corner-medium: 8px;
+    --shape-corner-large: 16px;
+    --shape-corner-extra-large: 28px;
+    --shape-corner-full: 999px;
+}
 
-        /* --- ЦВЕТНЫЕ БЛОКИ СЛЕВА --- */
-        .game-title {
-            background-color: #40E0D0; /* Бирюзовый */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            text-align: center;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+/* 2. Глобальные стили */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--surface);
+    color: var(--on-surface);
+    overflow: hidden;
+}
 
-        .turn-tracker {
-            background-color: #D8BFD8; /* Розовый (лиловый) */
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.3em;
-            text-align: center;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+* { box-sizing: border-box; }
 
-        #turn-display {
-            font-weight: bold;
-            margin-top: 5px;
-            font-size: 1.5em;
-        }
+/* 3. Основной контейнер */
+.game-container {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    grid-template-rows: 100vh;
+    width: 100%;
+    height: 100%;
+}
 
-        .qa-section {
-            background-color: #228B22; /* Зеленый */
-            color: white;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-        }
+.left-panel {
+    background-color: var(--surface-container-low);
+    padding: 16px;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 16px;
+    height: 100vh;
+    border-right: 1px solid var(--outline-variant);
+}
 
-        #question-container {
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            height: 80px; /* Фиксированная высота для вопроса */
-            overflow-y: auto;
-        }
-        
-        #answers-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            flex-grow: 1;
-        }
+.right-panel {
+    padding: 24px;
+    position: relative;
+}
 
-        .answer-card {
-            background-color: #F0FFF0;
-            color: #228B22;
-            border: 2px solid white;
-            border-radius: 8px;
-            padding: 10px;
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-            text-align: center;
-            font-weight: bold;
-        }
-        .answer-card:hover {
-            transform: scale(1.05);
-            background-color: white;
-        }
-        .answer-card.disabled {
-            pointer-events: none;
-            opacity: 0.6;
-        }
+/* 4. Компоненты левой панели (Cards) */
+.game-title, .turn-tracker, .qa-section, .dice-section {
+    background-color: var(--surface-container);
+    padding: 16px;
+    border-radius: var(--shape-corner-large);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-title {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    background-color: transparent;
+}
+
+.turn-tracker span {
+    font-size: 1em;
+    color: var(--on-surface-variant);
+}
+
+#turn-display {
+    font-weight: 700;
+    margin-top: 4px;
+    font-size: 2.2em;
+    color: var(--primary);
+}
+
+.qa-section {
+    background-color: var(--surface-container-highest);
+}
+
+#status-container {
+    font-size: 1.1em;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--on-surface);
+}
+
+/* Кубик в стиле Floating Action Button (FAB) */
+#dice {
+    width: 96px;
+    height: 96px;
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+    border: none;
+    border-radius: var(--shape-corner-extra-large);
+    font-size: 3.5em;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: var(--elevation-3);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+#dice:hover {
+    box-shadow: var(--elevation-4);
+    background-color: #b4daff; /* Чуть темнее при наведении */
+}
+#dice.disabled {
+    cursor: not-allowed;
+    background-color: var(--surface-container-high);
+    color: var(--on-surface-variant);
+    box-shadow: none;
+    opacity: 0.8;
+}
+
+/* Кнопка в стиле Filled Button */
+#restart-game-btn {
+    margin-top: 16px;
+    padding: 10px 24px;
+    height: 40px;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: var(--shape-corner-full);
+    border: none;
+    background-color: var(--secondary-container);
+    color: var(--on-secondary-container);
+    box-shadow: var(--elevation-1);
+    transition: all 0.2s ease;
+}
+#restart-game-btn:hover {
+    box-shadow: var(--elevation-2);
+}
 
 
-        .dice-section {
-            background-color: #0000FF; /* Синий */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+/* 5. Игровое поле */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+}
 
-        #dice {
-            width: 100px;
-            height: 100px;
-            background-color: white;
-            border: 2px solid black;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3em;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none; /* Запретить выделение текста */
-            transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
-        #dice:hover {
-             transform: scale(1.1) rotate(15deg);
-        }
-        #dice.disabled {
-            cursor: not-allowed;
-            background-color: #ccc;
-            opacity: 0.7;
-        }
+.step {
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--shape-corner-medium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    background-color: var(--surface-container);
+    color: var(--on-surface-variant);
+}
+
+.step.start { background-color: var(--primary); color: var(--on-primary); border: none; }
+.step.finish { background-color: var(--tertiary); color: var(--on-tertiary); border: none; }
+.step.special { background-color: var(--secondary-container); color: var(--on-secondary-container); border: none; }
+
+/* 6. Фишки игроков */
+.player {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    position: absolute;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    border: 3px solid var(--surface-container-lowest);
+    box-shadow: var(--elevation-3);
+}
+
+/* 7. Всплывающие окна (Dialogs) */
+#color-selection-popup {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    display: flex; justify-content: center; align-items: center;
+}
+
+#cell-popup, #winner-popup, #color-selection-popup .popup-content {
+    background-color: var(--surface-container-low);
+    border-radius: var(--shape-corner-extra-large);
+    padding: 24px;
+    z-index: 1000;
+    text-align: center;
+    box-shadow: var(--elevation-4);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+}
+
+#cell-popup, #winner-popup {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    visibility: hidden; opacity: 0;
+    width: 90%; max-width: 500px;
+}
+
+#cell-popup.show, #winner-popup.show {
+    visibility: visible; opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#cell-image {
+    width: 100%; height: 250px;
+    object-fit: cover;
+    border-radius: var(--shape-corner-large);
+    margin-bottom: 16px;
+}
+
+#cell-question, #winner-popup h2, #color-selection-popup h2 {
+    font-size: 1.5em;
+    color: var(--on-surface);
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+#cell-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Кнопки в стиле Tonal Button */
+.cell-answer-btn {
+    padding: 10px 15px;
+    height: 48px;
+    font-size: 1em; font-weight: 700;
+    cursor: pointer;
+    border-radius: var(--shape-corner-full);
+    border: none;
+    background-color: var(--secondary-container);
+    color: var(--on-secondary-container);
+    transition: all 0.2s ease;
+    position: relative; overflow: hidden;
+}
+/* Эффект State Layer при наведении */
+.cell-answer-btn::before {
+    content: ""; position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--on-secondary-container);
+    opacity: 0; transition: opacity 0.2s;
+}
+.cell-answer-btn:hover::before { opacity: 0.08; }
+.cell-answer-btn:active::before { opacity: 0.12; }
 
 
-        /* --- ИГРОВОЕ ПОЛЕ (КАРТА) --- */
-        #game-board {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr); /* 10 клеток в ширину */
-            grid-template-rows: repeat(7, 1fr); /* 7 клеток в высоту */
-            gap: 5px;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
+/* Кнопки в стиле Filled Button */
+#winner-popup button, #start-game-btn {
+    margin-top: 24px;
+    padding: 10px 24px;
+    height: 40px;
+    font-size: 1.1em; font-weight: 700;
+    cursor: pointer;
+    border-radius: var(--shape-corner-full);
+    border: none;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--elevation-1);
+    transition: all 0.2s ease;
+}
+#winner-popup button:hover, #start-game-btn:hover {
+    box-shadow: var(--elevation-2);
+}
+#start-game-btn.disabled {
+    background-color: var(--surface-container-high);
+    color: var(--on-surface-variant);
+    box-shadow: none; opacity: 0.8;
+}
 
-        .step {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid #333;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.9em;
-            font-weight: bold;
-            position: relative;
-        }
-        .step.start { background-color: #90EE90; }
-        .step.finish { background-color: #FFD700; }
+/* 8. Выбор цвета (Chips) - ИЗМЕНЕНО ДЛЯ 36 ЦВЕТОВ */
+#color-selection-popup .popup-content {
+    max-width: 420px; /* Делаем окно выбора немного шире */
+    width: 90%;
+}
 
-        /* --- ФИШКИ ИГРОКОВ --- */
-        .player {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            position: absolute; /* Позиционирование относительно родителя (.step) */
-            transition: all 0.7s ease-in-out;
-            z-index: 10;
-            border: 3px solid white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-        }
+.color-choices {
+    display: flex;
+    flex-wrap: wrap; /* Позволяем элементам переноситься на новую строку */
+    justify-content: center;
+    gap: 8px; /* Уменьшаем отступ между кружками */
+}
 
-        #player1 {
-            background-color: #1E90FF; /* Синий игрок */
-            transform: translate(-10px, -10px); /* Смещение для лучшего вида */
-        }
+.color-swatch {
+    width: 36px; /* Уменьшаем размер кружков */
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--outline-variant);
+    transition: all 0.2s ease;
+}
+.color-swatch.selected {
+    border-width: 3px; /* Делаем рамку чуть тоньше для маленьких кружков */
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+.color-swatch.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(80%);
+}
 
-        #player2 {
-            background-color: #FFD700; /* Желтый игрок */
-            transform: translate(10px, 10px); /* Смещение для лучшего вида */
-        }
-        
-        /* --- ВСПЛЫВАЮЩЕЕ ОКНО ПОБЕДИТЕЛЯ --- */
-        #winner-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background-color: white;
-            border: 5px solid #FFD700;
-            border-radius: 15px;
-            padding: 40px;
-            z-index: 1000;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.5s ease-in-out;
-            visibility: hidden;
-        }
-
-        #winner-popup.show {
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        #winner-popup h2 {
-            margin-top: 0;
-            font-size: 2.5em;
-            color: #1E90FF;
-        }
-        
-        #winner-popup button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 8px;
-            border: none;
-            background-color: #228B22;
-            color: white;
-        }
+/* 9. Адаптивность */
+@media (max-width: 900px) {
+    .game-container { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow-y: auto; }
+    .left-panel { height: auto; grid-template-rows: auto; grid-template-columns: 1fr 1fr; }
+    .game-title { grid-column: 1 / -1; }
+    .right-panel { height: 60vh; }
+}
