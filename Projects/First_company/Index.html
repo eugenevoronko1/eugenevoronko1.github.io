@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мебель Хит</title>
+    <link rel="icon" type="image/png" href="Images/sofa.png">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+</head>
+<body>
+    <!-- Меню -->
+    <nav>
+        <div class="logo"><a href="#home">Мебель Хит</a></div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul id="nav-menu">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#offers">Предложения</a></li>
+            <li><a href="#products">Продукция</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <video class="video-container" autoplay loop muted playsinline poster="Images/start_image.png">
+            <source src="Video/furniture.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="header-content">
+            <h1>Мебель хит</h1>
+        </div>
+    </header>
+
+    <main>
+        <!-- О нас -->
+        <section id="info">
+            <h2 id="about">О нас</h2>
+            <p>
+                Компания Мебель Хит — это производитель мебели, ориентированный на сочетание современного дизайна, эргономики и высокого качества.
+                Мы уверены, что мебель должна быть не просто предметом интерьера, а полноценным элементом уюта, функциональности и индивидуального стиля в вашем доме или офисе.
+            </p>
+        </section>
+
+        <!-- Карусель -->
+        <section class="hero-carousel">
+            <div class="carousel-track">
+                <img src="Images/logo-photo.jpg" alt="Пример офиса с нашей мебелью">
+                <img src="Images/Диваны.jpg" alt="Фото диванов">
+                <img src="Images/Кресла.jpg" alt="Фото кресла">
+                <img src="Images/Столы.jpg" alt="Фото столы">
+            </div>
+
+            <div class="blur-top"></div>
+            <div class="blur-bottom"></div>
+
+            <div class="carousel-caption">
+                <h1>Идеальная мебель для вашего дома и офиса</h1>
+            </div>
+        </section>
+
+        <!-- Предложения -->
+        <section id="info">
+            <h2 id="offers">Что мы предлагаем ?</h2>
+            <p class="info-intro">
+                Ассортимент Мебель Хит охватывает все основные категории домашней мебели — от практичных решений для небольших квартир до стильных комплектов для просторных интерьеров. Ниже вы можете ознакомиться с небольшой частью нашего ассортимента:
+            </p>
+
+            <div class="info-columns">
+                <div class="column">
+                    <h3>Мягкая мебель</h3>
+                    <ul>
+                        <li>Диваны</li>
+                        <li>Кресла</li>
+                        <li>Уголки</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Спальни</h3>
+                    <ul>
+                        <li>Кровати</li>
+                        <li>Прикроватные тумбы</li>
+                        <li>Комоды</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Кухонные гарнитуры</h3>
+                    <ul>
+                        <li>Гарнитуры</li>
+                        <li>Столы</li>
+                        <li>Стулья</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Мебель для прихожей</h3>
+                    <ul>
+                        <li>Вешалки</li>
+                        <li>Обувницы</li>
+                        <li>Стулья</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Мебель для ванной комнаты</h3>
+                    <ul>
+                        <li>Тумба под раковину</li>
+                        <li>Зеркальный шкаф</li>
+                        <li>Пенал</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="info-end">
+                Каждое изделие создаётся с учётом потребностей современного человека: мы заботимся о долговечности, эргономике и внешней эстетике нашей продукции.
+                Мы уверены — с Мебель Хит ваш дом станет местом, куда всегда хочется возвращаться.
+            </p>
+        </section>
+
+        <!-- Продукция -->
+        <section id="products">
+            <h2>Продукция</h2>
+            <div class="product-grid">
+                <!-- Повторяющийся блок товара -->
+                <div class="product"><img src="Images/Диваны.jpg" alt="Диваны"><figcaption>Диваны</figcaption></div>
+                <div class="product"><img src="Images/Кресла.jpg" alt="Столы"><figcaption>Кресла</figcaption></div>
+                <div class="product"><img src="Images/Уголки.jpg" alt="Кресла"><figcaption>Уголки</figcaption></div>
+                <div class="product"><img src="Images/Кровати.jpg" alt="Кровати"><figcaption>Кровати</figcaption></div>
+                <div class="product"><img src="Images/Прикроватные_тумбы.jpg" alt="Тумбы и Комоды"><figcaption>Прикроватные тумбы</figcaption></div>
+                <div class="product"><img src="Images/Комоды.jpg" alt="Вешалки"><figcaption>Комоды</figcaption></div>
+                <div class="product"><img src="Images/Гарнитуры.jpg" alt="Зеркала"><figcaption>Гарнитуры</figcaption></div>
+                <div class="product"><img src="Images/Столы.jpg" alt="Кухонная мебель"><figcaption>Столы</figcaption></div>
+                <div class="product"><img src="Images/Стулья.jpg" alt="Шкафы"><figcaption>Стулья</figcaption></div>
+                <div class="product"><img src="Images/Вешалки.jpg" alt="Ванная мебель"><figcaption>Вешалки</figcaption></div>
+                <div class="product"><img src="Images/Обувницы.jpg" alt="Ванная мебель"><figcaption>Обувницы</figcaption></div>
+                <div class="product"><img src="Images/Зеркала.jpg" alt="Ванная мебель"><figcaption>Зеркала</figcaption></div>
+                <div class="product"><img src="Images/Тумба_под_раковину.jpg" alt="Ванная мебель"><figcaption>Тумба под раковину</figcaption></div>
+                <div class="product"><img src="Images/Зеркальный_шкаф.jpg" alt="Ванная мебель"><figcaption>Зеркальный шкаф</figcaption></div>
+                <div class="product"><img src="Images/Пенал.jpg" alt="Ванная мебель"><figcaption>Пенал</figcaption></div>
+            </div>
+        </section>
+
+        <!-- Почему мы -->
+        <section id="why-us">
+            <div class="why-container">
+                <h2>Почему выбирают нас?</h2>
+                <ul class="why-list">
+                    <li>Собственное производство, что позволяет контролировать качество на всех этапах</li>
+                    <li>Индивидуальный подход — возможность заказа по размерам и пожеланиям клиента</li>
+                    <li>Доступные цены без переплат</li>
+                    <li>Гарантия на продукцию и послепродажное обслуживание</li>
+                    <li>Быстрая доставка и сборка</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contacts">
+            <div class="contact-info">
+                <h2>Контакты</h2>
+                <p>Email: info@mebelhit.by</p>
+                <p>Телефон: +375 29 123 45 67</p>
+                <p>
+                    Наш фирменный шоурум расположен в одном из крупнейших мебельных центров столицы. Здесь вы сможете лично оценить качество нашей продукции, получить консультацию специалистов и оформить заказ на любую интересующую модель.
+                </p>
+            </div>
+
+            <div class="contact-address">
+                <h2>Адрес</h2>
+                <address>
+                    <strong>Торговый центр «МебельПарк», 2-й этаж, павильон 214</strong><br>
+                    ул. <strong>Берестейская, 45</strong><br>
+                    г. <strong>Минск</strong>, 220089<br>
+                    <strong>Республика Беларусь</strong>
+                </address>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Мебель Хит</p>
+    </footer>
+
+    <script src="JS/script.js"></script>
+</body>
+</html>
