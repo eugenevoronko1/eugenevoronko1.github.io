@@ -1,42 +1,364 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="icon" type="image/png" href="Icons/icon-title.png">
-    </head>
-    <body>
-     <nav class="main-navigation">
-    <button class="burger" aria-label="Открыть меню">☰</button>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магическое письмо</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 
-    <div class="nav-wrapper">
-        <ul class="nav-items nav-left">
-            <li><a href="#">О нас</a></li>
-            <li><a href="#">Предложения</a></li>
-        </ul>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            user-select: none;
+        }
 
-        <div class="logo">
-            <a href="#home">Мебель хит</a>
+        body {
+            background-color: #050508;
+            background-image: url('https://images.unsplash.com/photo-1618944913480-1ee72873ec86?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: 'Caveat', cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bg-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(5, 8, 20, 0.4), rgba(0, 0, 0, 0.8));
+            z-index: 0; pointer-events: none;
+        }
+
+        .stars { position: absolute; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+
+        .parchment {
+            background-color: #e8c99b;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 0.9 0 0 0  0 0.8 0 0 0  0 0 0 0.15 0" in="noise" result="coloredNoise"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+        }
+
+        /* --- КОНВЕРТ --- */
+        .envelope-wrapper {
+            position: relative; 
+            width: 400px; height: 260px; 
+            z-index: 10;
+            perspective: 1200px; 
+            margin-top: 150px; 
+        }
+
+        .envelope-back {
+            position: absolute; inset: 0;
+            background-color: #c99b5d;
+            border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.7); 
+            z-index: 1;
+        }
+
+        /* --- 3D ПИСЬМО --- */
+        .letter-container {
+            position: absolute; 
+            width: 360px; height: 160px; 
+            left: 20px; top: 40px;
+            transform-style: preserve-3d;
+            
+            /* БАЗОВОЕ СОСТОЯНИЕ (ЗАКРЫТОЕ) */
+            transform: translateY(0) scale(1);
+            z-index: 2; 
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s, z-index 0s 0.8s, box-shadow 0.8s 0.8s;
+        }
+
+        /* СОСТОЯНИЕ (ОТКРЫТОЕ) - Письмо вылетает */
+        .envelope-wrapper.is-open .letter-container { 
+            transform: translateY(-200px) scale(1.1); 
+            z-index: 20; 
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.6);
+            transition: transform 0.8s 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), z-index 0s 0.5s, box-shadow 1s 1s;
+        }
+
+        .fold {
+            position: absolute; width: 100%; height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .face {
+            position: absolute; inset: 0;
+            backface-visibility: hidden;
+            padding: 20px 25px;
+            display: flex; flex-direction: column;
+            color: #3e2723;
+        }
+
+        .face.back { transform: rotateX(180deg); border: 1px solid rgba(0,0,0,0.1); }
+        .face.front { box-shadow: inset 0 0 15px rgba(100,50,0,0.1); }
+
+        .letter-container h1 { font-family: 'Marck Script', cursive; font-size: 26px; text-align: center; margin-bottom: 10px; color: #5d4037; }
+        .letter-container p { font-size: 19px; line-height: 1.3; }
+
+        .fold-mid { top: 0; left: 0; z-index: 2; }
+        
+        /* Створки (Базовое состояние - СЛОЖЕНО) */
+        .fold-top {
+            top: -160px; transform-origin: bottom;
+            transform: rotateX(-179.9deg); z-index: 3;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+        }
+        .fold-bottom {
+            top: 160px; transform-origin: top;
+            transform: rotateX(179.9deg); z-index: 1;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+        }
+
+        /* Створки (Открытое состояние - РАЗВЕРНУТО) */
+        .envelope-wrapper.is-open .fold-top,
+        .envelope-wrapper.is-open .fold-bottom {
+            transform: rotateX(0deg);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.3s;
+        }
+
+        /* --- КАРМАШКИ КОНВЕРТА --- */
+        .envelope-front {
+            position: absolute; inset: 0; z-index: 3; pointer-events: none;
+        }
+        .flap-filter { position: absolute; inset: 0; filter: drop-shadow(0 0 6px rgba(50, 20, 0, 0.7)); }
+        .flap { position: absolute; inset: 0; background-color: #dfb47a; }
+        .flap-left { clip-path: polygon(0 0, 50% 50%, 0 100%); }
+        .flap-right { clip-path: polygon(100% 0, 50% 50%, 100% 100%); }
+        .flap-bottom { clip-path: polygon(0 100%, 50% 50%, 100% 100%); background-color: #e5c088; }
+        
+        /* Крышка и печать */
+        .flap-top-wrapper { 
+            position: absolute; inset: 0; z-index: 4; pointer-events: auto; transform-origin: top; 
+            transform: rotateX(0deg);
+            transition: transform 0.5s 1.6s, z-index 0s 1.6s; 
+        }
+        .flap-top { clip-path: polygon(0 0, 100% 0, 50% 55%); background-color: #edcfa3; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.6)); }
+
+        .wax-seal {
+            position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: radial-gradient(circle at 35% 35%, #d32f2f, #8e0000);
+            border-radius: 50%; z-index: 5; box-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 0 15px rgba(70,0,0,0.9);
+            opacity: 1;
+            transition: opacity 0.3s 2.1s; 
+        }
+        .wax-seal::after {
+            content: 'Е'; /* Заменено на Е */
+            color: #ffd700; font-family: 'Marck Script', cursive; font-size: 34px;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -45%); text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        /* Крышка (Открытое состояние) */
+        .envelope-wrapper.is-open .flap-top-wrapper { 
+            transform: rotateX(180deg); z-index: 1; 
+            transition: transform 0.5s 0s, z-index 0s 0.25s; 
+        }
+        .envelope-wrapper.is-open .wax-seal { opacity: 0; transition: opacity 0.2s 0s; pointer-events: none; }
+
+        /* --- UI --- */
+        .mischief-text {
+            position: absolute; bottom: 30px; color: #ffd700; font-size: 34px;
+            text-shadow: 0 0 10px #d4af37, 0 0 20px rgba(255,255,255,0.4);
+            transition: all 0.3s; z-index: 30; text-align: center;
+        }
+        .mischief-text:hover { transform: scale(1.1); text-shadow: 0 0 20px #ffd700, 0 0 40px white; }
+
+        /* --- ПАЛОЧКА И СНИТЧ --- */
+        #wand {
+            position: fixed; width: 60px; height: 60px; z-index: 9999; pointer-events: none;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M15,85 L85,15" stroke="%233E2723" stroke-width="7" stroke-linecap="round"/><path d="M60,40 L85,15" stroke="%231b0e09" stroke-width="9" stroke-linecap="round"/><circle cx="85" cy="15" r="4" fill="%23fff" filter="blur(2px)"/></svg>') no-repeat center;
+            background-size: contain; 
+        }
+        .wand-particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; filter: blur(2px); }
+
+        #snitch { position: fixed; width: 24px; height: 24px; z-index: 25; pointer-events: none; }
+        .snitch-body {
+            position: absolute; inset: 0; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff8e1, #ffc107 50%, #ff8f00);
+            box-shadow: 0 0 20px #ffc107, inset -3px -3px 8px rgba(0,0,0,0.3); z-index: 2;
+        }
+        .snitch-wing {
+            position: absolute; top: 4px; width: 45px; height: 16px;
+            background: rgba(255,255,255,0.7); box-shadow: 0 0 10px rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,215,0,0.5); z-index: 1;
+        }
+        .wing-l { left: -42px; border-radius: 100% 0 50% 50%; transform-origin: right center; animation: flapL 0.03s infinite alternate linear; }
+        .wing-r { right: -21px; border-radius: 0 100% 50% 50%; transform-origin: left center; animation: flapR 0.03s infinite alternate linear; }
+        @keyframes flapL { 0% { transform: rotate(40deg); } 100% { transform: rotate(-50deg); } }
+        @keyframes flapR { 0% { transform: rotate(-40deg); } 100% { transform: rotate(50deg); } }
+        .snitch-sparkle { position: fixed; border-radius: 50%; background: #ffd700; box-shadow: 0 0 10px #ffc107; pointer-events: none; z-index: 24; filter: blur(1px); }
+
+        @media (max-width: 600px) {
+            .envelope-wrapper { transform: scale(0.7); margin-top: 100px; }
+            .mischief-text { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+    <div class="stars" id="stars"></div>
+
+    <div class="envelope-wrapper" id="envelope">
+        <div class="envelope-back parchment"></div>
+        
+        <div class="letter-container" id="magical-letter">
+            <div class="fold fold-top">
+                <div class="face front parchment">
+                    <h1>Дорогая Лена,</h1>
+                    <p>Мы рады сообщить Вам, что Вы приняты в Школу Чародейства и Волшебства.</p>
+                </div>
+                <div class="face back parchment"></div>
+            </div>
+            <div class="fold fold-mid">
+                <div class="face front parchment">
+                    <br>
+                    <p>Ваши знания, чуткость и умение создавать настоящую магию вокруг себя...</p>
+                </div>
+                <div class="face back parchment"></div>
+            </div>
+            <div class="fold fold-bottom">
+                <div class="face front parchment">
+                    <p>...не оставили нам абсолютно никакого выбора. Ждем Вас с нетерпением!</p>
+                    <p style="text-align: right; margin-top: auto; font-size: 16px;">С уважением,<br>Министерство Магии</p>
+                </div>
+                <div class="face back parchment"></div>
+            </div>
         </div>
 
-        <ul class="nav-items nav-right">
-            <li><a href="#">Продукция</a></li>
-            <li><a href="#">Контакты</a></li>
-        </ul>
+        <div class="envelope-front">
+            <div class="flap-filter"><div class="flap flap-left parchment"></div></div>
+            <div class="flap-filter"><div class="flap flap-right parchment"></div></div>
+            <div class="flap-filter"><div class="flap flap-bottom parchment"></div></div>
+        </div>
+        
+        <div class="flap-top-wrapper">
+            <div class="flap flap-top parchment"></div>
+            <div class="wax-seal"></div>
+        </div>
     </div>
-</nav>
 
+    <div class="mischief-text" id="toggle-btn">Торжественно клянусь, что замышляю шалость!</div>
 
-        <header>
+    <div id="wand"></div>
 
-        </header>
+    <div id="snitch">
+        <div class="snitch-wing wing-l"></div>
+        <div class="snitch-body"></div>
+        <div class="snitch-wing wing-r"></div>
+    </div>
 
-        <main>
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            let size = Math.random() * 2.5 + 0.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.animationDuration = Math.random() * 3 + 1.5 + 's';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
 
-        </main>
+        const envelope = document.getElementById('envelope');
+        const toggleBtn = document.getElementById('toggle-btn');
+        let isOpening = false;
 
-        <footer>
+        function toggleLetter() {
+            if(isOpening) return;
+            isOpening = true;
 
-        </footer>
-        <script type="text/javascript" src="Scripts/script.js"></script>
-    </body>
+            const isOpen = envelope.classList.contains('is-open');
+            if (isOpen) {
+                envelope.classList.remove('is-open');
+                setTimeout(() => { toggleBtn.innerText = 'Торжественно клянусь, что замышляю шалость!'; isOpening = false; }, 2400);
+            } else {
+                envelope.classList.add('is-open');
+                setTimeout(() => { toggleBtn.innerText = 'Шалость удалась!'; isOpening = false; }, 2100);
+            }
+        }
+        envelope.addEventListener('click', toggleLetter);
+        toggleBtn.addEventListener('click', toggleLetter);
+
+        const wand = document.getElementById('wand');
+        let wandParticles = [];
+        const wandColors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#ffffff'];
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            wand.style.left = (mouseX - 51) + 'px';
+            wand.style.top = (mouseY - 9) + 'px';
+            
+            for(let i=0; i<1; i++) {
+                let p = document.createElement('div');
+                p.className = 'wand-particle';
+                let size = Math.random() * 6 + 2;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.background = wandColors[Math.floor(Math.random() * wandColors.length)];
+                p.style.boxShadow = `0 0 ${size+2}px ${p.style.background}`;
+                document.body.appendChild(p);
+                wandParticles.push({ el: p, x: mouseX, y: mouseY, vx: (Math.random() - 0.5) * 2, vy: (Math.random() - 0.5) * 2 + 0.5, life: 1 });
+            }
+        });
+
+        const snitchEl = document.getElementById('snitch');
+        let snitchX = window.innerWidth / 3;
+        let snitchY = window.innerHeight / 3;
+        let targetX = snitchX; let targetY = snitchY;
+        let snitchParticles = [];
+
+        setInterval(() => {
+            targetX = Math.random() * (window.innerWidth - 100) + 50;
+            targetY = Math.random() * (window.innerHeight - 200) + 50;
+        }, 1200);
+
+        function renderLoop() {
+            for(let i = wandParticles.length - 1; i >= 0; i--) {
+                let p = wandParticles[i];
+                p.x += p.vx; p.y += p.vy; p.life -= 0.025; 
+                if(p.life <= 0) { p.el.remove(); wandParticles.splice(i, 1); } 
+                else { p.el.style.left = p.x + 'px'; p.el.style.top = p.y + 'px'; p.el.style.opacity = p.life; p.el.style.transform = `scale(${p.life})`; }
+            }
+
+            snitchX += (targetX - snitchX) * 0.05;
+            snitchY += (targetY - snitchY) * 0.05;
+            let wobble = Math.sin(Date.now() * 0.005) * 15; 
+            
+            snitchEl.style.left = (snitchX - 12) + 'px';
+            snitchEl.style.top = (snitchY + wobble - 12) + 'px';
+
+            if(Math.random() > 0.5) {
+                let sp = document.createElement('div');
+                sp.className = 'snitch-sparkle';
+                let size = Math.random() * 4 + 2;
+                sp.style.width = size + 'px'; sp.style.height = size + 'px';
+                document.body.appendChild(sp);
+                snitchParticles.push({ el: sp, x: snitchX + (Math.random()*10 - 5), y: snitchY + wobble + (Math.random()*10 - 5), life: 1 });
+            }
+
+            for(let i = snitchParticles.length - 1; i >= 0; i--) {
+                let p = snitchParticles[i];
+                p.life -= 0.035;
+                if(p.life <= 0) { p.el.remove(); snitchParticles.splice(i, 1); } 
+                else { p.el.style.left = p.x + 'px'; p.el.style.top = p.y + 'px'; p.el.style.opacity = p.life; p.el.style.transform = `scale(${p.life})`; }
+            }
+            requestAnimationFrame(renderLoop);
+        }
+        renderLoop();
+    </script>
+</body>
 </html>
+
